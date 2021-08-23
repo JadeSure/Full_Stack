@@ -1,24 +1,29 @@
 const express = require('express')
+// const cors = require('cors')
+
 const app = express()
+app.use(cors)
+// app.use(cors())
+
 
 // middle ware
 app.use(express.json()) 
 
 resList = []
 // task1
-app.post('/task1', (req, res)=>{
+app.post('/tasks', (req, res)=>{
     resList.push(req.body)
     // const temp = req.body
     // res.status(201).json({temp, description: "The task successfully added"})
     res.status(201).json(req.body)
 })
 
-app.get('/task2', (req, res)=>{
+app.get('/tasks', (req, res)=>{
     res.status(200).json(resList)
 })
 
-app.get('/task3', (req,res)=>{
-    const {id} = req.query
+app.get('/tasks/:id', (req,res)=>{
+    const {id} = req.params
     // const exist = false
     resList.forEach(element => {
   
@@ -36,7 +41,7 @@ app.get('/task3', (req,res)=>{
 })
 
 
-app.put('/task4/:id', (req,res)=>{
+app.put('/tasks/:id', (req,res)=>{
     const {id} = req.params
 
     for (let index = 0; index < resList.length; index++) {
@@ -49,7 +54,7 @@ app.put('/task4/:id', (req,res)=>{
 })
 
 
-app.delete('/task5/:id', (req,res)=>{
+app.delete('/tasks/:id', (req,res)=>{
     const {id} = req.params
     for (let index = 0; index < resList.length; index++) {
         const element = resList[index];
@@ -59,6 +64,13 @@ app.delete('/task5/:id', (req,res)=>{
         }
     }
 })
+
+function cors(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers', '*')
+    res.setHeader('Access-Control-Allow-Methods', '*')
+    next()
+}
 
 app.listen(3000, () =>{
     console.log("server listening at point 3000");

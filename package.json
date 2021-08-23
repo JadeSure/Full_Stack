@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "redux": "^4.1.1",
@@ -17,7 +18,7 @@
     "webpack-dev-server": "^4.0.0"
   },
   "scripts": {
-    "npmDev": "nodemon .\\L10Homework.js",
+    "npmDev": "nodemon ./L10Homework.js",
     "start": "node index.js",
     "debug": "node --inspect .\\L10express.js",
     "yarnDev": "webpack-dev-server --config ./webpack.config.js"
